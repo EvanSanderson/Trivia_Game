@@ -1,35 +1,36 @@
 $(document).ready(function() {
   console.log("test");
+// global variable contains questions and answer key values
   var questions = [
     {question:"<p>What is two plus three?</p>",
-    answer1: 2,
-    answer2: 3,
-    answer3: 5},
+    answers: [2,3,5],
+    answerKey: 5},
     {question: "What is an elephant?",
-    answer1: 2,
-    answer2: "A fruit",
-    answer3: "An animal"}
+    answers: [2, "An animal", "fruit"],
+    answerKey: "An animal"
+    }
   ]
-  console.log(questions[1]);
+
+var number = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+
 
   function loadQuestion() {
-    $(".questions").html(questions[1]["question"]);
-    console.log(questions[1]["question"]);
-  }
+    // var number = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+    console.log(number);
+    $(".questions").html(questions[number]["question"]);
+    console.log(questions[number]["question"]);
+}
+    function loadAnswers() {
+        $("ul").each(function() {
+          for(i=0;i<3;i++){
+            $("<li/>").appendTo(this)
+            $("li").eq(i).html(questions[number].answers[i]);
+        }
+        })
+      }
 
-  loadQuestion();
-
-    // $(".wrong").on("click", function() {
-    //     console.log("button working");
-    //     $("#answer").html("<p>You are wrong sucka</p>");
-    // })
-    //
-    // $(".right").on("click", function() {
-    //   console.log("right button working");
-    //   $("#answer").html("<p>You are right!! WOO! </p>");
-    //   $(".nextQuestion").css("visibility", "visible");
-    //
-    // })
+    loadQuestion();
+    loadAnswers();
 
 
 
