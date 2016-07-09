@@ -3,8 +3,8 @@ $(document).ready(function() {
 // global variable contains questions and answer key values
   var questions = [
     {question:"<p>What is two plus three?</p>",
-    answers: [2,3,5],
-    answerKey: 5
+    answers: ["2","3","5"],
+    answerKey: "5"
     },
     {question: "What is an elephant?",
     answers: [2, "An animal", "fruit"],
@@ -17,7 +17,7 @@ $(document).ready(function() {
   ]
 
 
-var number = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+var number = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
 
 
 function loadQuestion() {
@@ -36,13 +36,32 @@ function loadAnswers() {
   })
 }
 
+// function nextQuestion() {
+//   // // questions.splice(number, 1);
+//   // var newNumber = number - 1;
+//   // $(".questions").html(questions[newNumber]["questions"]);
+//   // loadAnswers();
+// }
     loadQuestion();
     loadAnswers();
 
-    $("li").hover(function() {
-      console.log("hover working");
-      $(this).toggleClass("answerHover");
-    })
+    $("li").on({
+      click: function() {
+        var userClick = $(this).html();
+        var rightAnswer = questions[number].answerKey;
+              if(userClick === rightAnswer){
+                  $("#answer").html("<p>You got it right!</p>")
+              } else {
+                $("#answer").html("<p>Wrong! Sorry! Try again.</p>")
+              };
+            },
+      mouseover: function() {
+            $(this).addClass("answerHover");
+          },
+      mouseleave: function() {
+          $(this).removeClass("answerHover");
+      }
+    });
 
 
 // HAd a timer on each question, each question was worth 100 points, each second would eliminate a question,, and worth less points.
