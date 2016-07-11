@@ -30,35 +30,44 @@ $(document).ready(function() {
   var questions = [
     {question:"<p> Some knave steps up and compares your smell to old milk. What do you throw back at him? </p> <br> </p> Thou art as _____ as butter.</p>",
     answers: ["stinky","odious","farty","fat","runny"],
-    answerKey: "fat"
+    answerKey: "fat",
+    questionTime: 50
     },
     {question: "<p>Two rapscallions tell you that you have the brains and prowess of a field mouse.</p> <br> <p> What creature would Shakespeare use to describe those who lie venomously and are generally nasty buggers?</p>",
     answers: ["A snake", "A toad", "An adder", "A stingfish", "A snapping turtle"],
-    answerKey: "A toad"
+    answerKey: "A toad",
+    questionTime: 45
   },
     {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem: Your ___ breeds mites, much like ___</p>",
     answers: ["virginity/cheese", "breath/rotten flesh", "humours/sewage", "crouch/stale bread", "face/manure"],
-    answerKey: "virginity/cheese"
+    answerKey: "virginity/cheese",
+    questionTime: 40
   },
     {question: "<p>A thin woman sidles up to you and whispers in your ear something indecent about your mother.</p> <br><p>You have to spit something back, but your mind is blank. What would Titus Andronicus say? </p>",
     answers: ["Thy mother is an elderberry whore", "Avaunt! You spittewattle arse-licker!", "Villain, I have done thy mother", "Ho-thou was't fathered by an infected newt", "Feast on my trousers, codswallow"],
-    answerKey: "Villain, I have done thy mother"
+    answerKey: "Villain, I have done thy mother",
+    questionTime: 30
   },
     {question: "<p> The crowd is calling for a Timon of Athens insult! Timon of Athens? Is that even a Shakespearean play? </p> <br> <p> It's tim-on to spit some Athenian insults! What do you say? </p>",
     answers: ["Methink’st thou art a general offence and every man should beat thee", "I do wish thou were a dog, that I might love thee something", "On my knee I give heaven thanks that I am not like to thee", "Thou halfpenny purse of wit, thou pigeon egg of discretion", "Stinkwattle! Odious foot-monger! Bearer of bile!"],
-    answerKey: "I do wish thou were a dog, that I might love thee something"
+    answerKey: "I do wish thou were a dog, that I might love thee something",
+    questionTime: 25
 },
   {question: "<p> A hush comes over the crowd, and a wild Falstaff appears. Considered a Shakespearean put-down master, Falstaff is known for stringing insult onto insult until either he or his opponent collapse.</p><br><p> His only known weakness are insults he hasn't heard before (i.e. NOT FROM SHAKESPEARE). What do you say?! Quick! He's about start!</p>",
   answers: ["Peace, ye fat guts", "Thou scullion! Thou rampallion!", "Thou whoreson obscene greasy tallow-catch!", "You sweat to death and lard the lean earth you walk upon", "Thou roguish unchin-snouted common-kissing canker-blossom!"],
-  answerKey: "Thou roguish unchin-snouted common-kissing canker-blossom!"
+  answerKey: "Thou roguish unchin-snouted common-kissing canker-blossom!",
+  questionTime: 25
   }
   ]
 
+  var currentQuestion = 0;
+  var numPoints = 0;
 
 // var number = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
-var startTime = 200;
+var startTime = questions[currentQuestion].questionTime;
 var interval;
 var endTime = 0;
+console.log(questions[currentQuestion].questionTime);
 
 function timer() {
 
@@ -80,8 +89,6 @@ function timerGo() {
 };
 
 
-var currentQuestion = 0;
-var numPoints = 0;
 
 function loadQuestion() {
   // loads the first question in the array
@@ -118,7 +125,7 @@ function pointsGoDown() {
       currentQuestion +=1;
       $(".questions").html(questions[currentQuestion]["question"]);
       clearInterval(interval);
-      startTime -= 30;
+      startTime = questions[currentQuestion].questionTime;
       timerGo();
       $("ul").each(function() {
         for(i=0;i<5;i++){
