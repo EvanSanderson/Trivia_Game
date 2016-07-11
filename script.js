@@ -79,6 +79,7 @@ function timer() {
   } else {
     clearInterval(interval);
     $("#timeCounter").html("<p>Time is out! </p>");
+    setTimeout(resetGame, 2000);
   }
 }
 
@@ -95,6 +96,7 @@ function loadQuestion() {
   $(".questions").html(questions[currentQuestion]["question"]);
   $("#pointCounter").html("0 points");
 
+  // launches the timer
   timerGo();
 }
 
@@ -142,9 +144,23 @@ function fade_out() {
   $("#answer").html("");
 }
 
+// function to reset the game
+function resetGame() {
+  currentQuestion = 0;
+  numPoints = 0;
+  loadQuestion();
+  for(i=0;i<5;i++){
+    $("li").eq(i).html(questions[currentQuestion].answers[i]);
+  }
+  $("ul li").shuffle();
+  clearInterval(interval);
+}
+
+
 // click and mouseover functions tied to lis (answers)
     $("li").on({
-      click: function() {
+      click: function(e) {
+        e.preventDefault();
         var userClick = $(this).html();
         var rightAnswer = questions[currentQuestion].answerKey;
               if(userClick === rightAnswer){
@@ -152,9 +168,14 @@ function fade_out() {
                   setTimeout(fade_out, 5000);
                   // makes the pointsCounter div go up
                   pointsGoUp();
+                  $(".shakespeare").addClass("not-off");
+                  setTimeout(function() {
+                    $(".shakespeare").removeClass("not-off");
+                  }, 5000);
                   //end of game prompt
                   if (currentQuestion === questions.length - 1) {
                     $("#answer").html("<p>You beat the game! Congrats!</p>");
+                    resetGame();
                     return;
                   };
                   // loads the next question
@@ -168,17 +189,25 @@ function fade_out() {
                 setTimeout(fade_out, 5000);
                 pointsGoDown();
               };
+              if(numPoints === -60) {
+                $("#answer").html("<p>You got too many wrong. The crowd booed you out of the theater.</p>");
+                resetGame();
+                return;
+              }
             },
-      mouseover: function() {
+      mouseover: function(e) {
+            e.preventDefault();
             $(this).addClass("answerHover");
           },
-      mouseleave: function() {
+      mouseleave: function(e) {
+          e.preventDefault();
           $(this).removeClass("answerHover");
       }
 
 
     });
 
+    // resets if player hits certain threshold of negative numbers
 
 // HAd a timer on each question, each question was worth 100 points, each second would eliminate a question,, and worth less points.
 //make modular with dom loading a new one each time
