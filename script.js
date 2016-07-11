@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 // global variable contains questions and answer key values
   var questions = [
-    {question:"<p> Some knave steps up and compares your smell to old milk. What do you throw back at him? </p> <br> </p> Thou art as _____ as butter.</p>",
+    {question:"<p> Some knave steps up and compares your smell to old milk. What stinger do you throw back at him? </p> <br> <p> Thou art as _____ as butter.</p>",
     answers: ["stinky","odious","farty","fat","runny"],
     answerKey: "fat",
     questionTime: 50
@@ -74,7 +74,7 @@ function timer() {
   if(endTime < startTime) {
     // subtracts a second from the starttime
     startTime -= 1;
-    $("#timeCounter").html(startTime);
+    $("#timeCounter").html("You have " + startTime + "s left.");
 
   } else {
     clearInterval(interval);
@@ -93,6 +93,8 @@ function timerGo() {
 function loadQuestion() {
   // loads the first question in the array
   $(".questions").html(questions[currentQuestion]["question"]);
+  $("#pointCounter").html("0 points");
+
   timerGo();
 }
 
@@ -109,12 +111,12 @@ function loadAnswers() {
 
 function pointsGoUp() {
   numPoints += 20;
-  $("#pointCounter").html(numPoints);
+  $("#pointCounter").html(numPoints + " points");
 }
 
 function pointsGoDown() {
   numPoints -= 20;
-  $("#pointCounter").html(numPoints);
+  $("#pointCounter").html(numPoints + " points");
 }
 
     loadQuestion();
@@ -135,7 +137,10 @@ function pointsGoDown() {
       $("ul li").shuffle();
     };
 
-
+// fades out the right or wrong answer prompt;
+function fade_out() {
+  $("#answer").html("");
+}
 
 // click and mouseover functions tied to lis (answers)
     $("li").on({
@@ -144,6 +149,7 @@ function pointsGoDown() {
         var rightAnswer = questions[currentQuestion].answerKey;
               if(userClick === rightAnswer){
                   $("#answer").html("<p>You got it right!</p>");
+                  setTimeout(fade_out, 5000);
                   // makes the pointsCounter div go up
                   pointsGoUp();
                   //end of game prompt
@@ -159,6 +165,7 @@ function pointsGoDown() {
 
               } else {
                 $("#answer").html("<p>Wrong! Sorry! Try again.</p>");
+                setTimeout(fade_out, 5000);
                 pointsGoDown();
               };
             },
@@ -186,4 +193,7 @@ function pointsGoDown() {
 //6. add styling
 //7. add intro that sets up the game
 //8. add descending point values for the timer going down
+// add a light box like feature
+// add a floating Shakespeare figure who comes in when you are right.
+
 });
