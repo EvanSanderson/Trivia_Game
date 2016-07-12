@@ -57,7 +57,6 @@ span.on("click", function() {
 var startTime = questions[currentQuestion].questionTime;
 var interval;
 var endTime = 0;
-console.log(questions[currentQuestion].questionTime);
 
 function timer() {
 
@@ -65,13 +64,14 @@ function timer() {
     // subtracts a second from the starttime
     startTime -= 1;
     $("#timeCounter").html("You have " + startTime + "s left.");
-
   } else {
     clearInterval(interval);
     $("#timeCounter").html("<p>Time is out! </p>");
     setTimeout(resetGame, 2000);
   }
+
 }
+
 
 function timerGo() {
   // sets the timer going on a set interval
@@ -85,7 +85,6 @@ function loadQuestion() {
   // loads the first question in the array
   $(".questions").html(questions[currentQuestion]["question"]);
   $("#pointCounter").html("0 points");
-
   // launches the timer
   timerGo();
 }
@@ -101,13 +100,21 @@ function loadAnswers() {
   $("ul li").shuffle();
 }
 
+
+
 function pointsGoUp() {
+  if(startTime >= questions[currentQuestion].questionTime - (questions[currentQuestion].questionTime / 3)) {
   numPoints += 20;
+} else if (startTime >= questions[currentQuestion].questionTime - ((questions[currentQuestion].questionTime / 3)*2) && startTime < questions[currentQuestion].questionTime - (questions[currentQuestion].questionTime / 3)) {
+    numPoints += 10;
+  } else {
+    numPoints += 5;
+  }
   $("#pointCounter").html(numPoints + " points");
 }
 
 function pointsGoDown() {
-  numPoints -= 20;
+  numPoints -= 10;
   $("#pointCounter").html(numPoints + " points");
 }
 
@@ -123,11 +130,13 @@ function pointsGoDown() {
       timerGo();
       $("ul").each(function() {
         for(i=0;i<5;i++){
+          $("li").eq(i).show();
           $("li").eq(i).html(questions[currentQuestion].answers[i]);
         }
       })
       $("ul li").shuffle();
     };
+
 
 // fades out the right or wrong answer prompt;
 function fade_out() {
@@ -143,7 +152,6 @@ function resetGame() {
   for(i=0;i<5;i++){
     $("li").eq(i).html(questions[currentQuestion].answers[i]);
   }
-  // $("ul li").shuffle();
 }
 
 function shakespearePop () {
@@ -171,7 +179,7 @@ setTimeout(function() {
                   //this codes runs when you complete the game
                   if (currentQuestion === questions.length - 1) {
                     $("#answer").html("<p>TRUMEPTS! CHEERS! CAKE! YOU WIN!</p>");
-                    modal.html("<div class='modal-content'><p>Thou hast beaten all opponents, and verily are a true insult master. Go forth, insult-knight, and use thy skills for good. As Shakespeare himself once said, 'With great power comes great responsibility.'</p></div>");
+                    modal.html("<div class='modal-content'><p>Thou hast beaten all opponents, and verily are a true insult master. Go forth, insult-knight, and use thy skills for good. As Shakespeare himself once said, 'With great power comes great responsibility. You got " + numPoints + " points! </div>");
                     modal.css("display", "block");
                   };
                   // loads the next question
@@ -200,8 +208,23 @@ setTimeout(function() {
           $(this).removeClass("answerHover");
       }
 
-
     });
+
+    var testTime = questions[currentQuestion].questionTime * 1000;
+    var currentAnswer = questions[currentQuestion].answerKey;
+
+      setTimeout(function() {
+        $("ul li").eq(0).hide();
+      }, (testTime/4));
+
+      setTimeout(function() {
+        $("ul li").eq(1).hide();
+      }, (testTime/2));
+
+      setTimeout(function() {
+        $("ul li").eq(2).hide();
+      }, (testTime * 3/4));
+
 
     // resets if player hits certain threshold of negative numbers
 
@@ -220,5 +243,8 @@ setTimeout(function() {
 //8. add descending point values for the timer going down
 // add a light box like feature
 // add a floating Shakespeare figure who comes in when you are right.
-
+// all above is done
+//add sound !
+// add more questions!
+/// change boss battle thing
 });
