@@ -146,16 +146,23 @@ function fade_out() {
 
 // function to reset the game
 function resetGame() {
+  clearInterval(interval);
   currentQuestion = 0;
   numPoints = 0;
   loadQuestion();
   for(i=0;i<5;i++){
     $("li").eq(i).html(questions[currentQuestion].answers[i]);
   }
-  $("ul li").shuffle();
-  clearInterval(interval);
+  // $("ul li").shuffle();
 }
 
+function shakespearePop () {
+$(".shakespeareText").html("<p style='color:white'>Great job! Keep it up!</p>")
+$(".shakespeare").addClass("not-off");
+setTimeout(function() {
+  $(".shakespeare").removeClass("not-off");
+}, 5000);
+}
 
 // click and mouseover functions tied to lis (answers)
     $("li").on({
@@ -168,10 +175,7 @@ function resetGame() {
                   setTimeout(fade_out, 5000);
                   // makes the pointsCounter div go up
                   pointsGoUp();
-                  $(".shakespeare").addClass("not-off");
-                  setTimeout(function() {
-                    $(".shakespeare").removeClass("not-off");
-                  }, 5000);
+                  shakespearePop();
                   //end of game prompt
                   if (currentQuestion === questions.length - 1) {
                     $("#answer").html("<p>You beat the game! Congrats!</p>");
