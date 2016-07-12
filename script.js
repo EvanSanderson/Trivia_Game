@@ -1,37 +1,28 @@
 $(document).ready(function() {
   console.log("test");
-// shuffle funciton defined, courtesy of James Padolsey
-(function($){
 
-    $.fn.shuffle = function() {
+var modal = $("#myModal");
+var btn = $("#myBtn");
+var span = $(".close");
 
-        var allElems = this.get(),
-            getRandom = function(max) {
-                return Math.floor(Math.random() * max);
-            },
-            shuffled = $.map(allElems, function(){
-                var random = getRandom(allElems.length),
-                    randEl = $(allElems[random]).clone(true)[0];
-                allElems.splice(random, 1);
-                return randEl;
-           });
+$(window).load(function() {
+  modal.css("display", "block");
+})
 
-        this.each(function(i){
-            $(this).replaceWith($(shuffled[i]));
-        });
+btn.on("click", function(){
+  modal.css("display", "block");
+})
 
-        return $(shuffled);
-
-    };
-
-})(jQuery);
+span.on("click", function() {
+  modal.css("display", "none");
+})
 
 // global variable contains questions and answer key values
   var questions = [
     {question:"<p> Some knave steps up and compares your smell to old milk. What stinger do you throw back at him? </p> <br> <p> Thou art as _____ as butter.</p>",
     answers: ["stinky","odious","farty","fat","runny"],
     answerKey: "fat",
-    questionTime: 50
+    questionTime: 60
     },
     {question: "<p>Two rapscallions tell you that you have the brains and prowess of a field mouse.</p> <br> <p> What creature would Shakespeare use to describe those who lie venomously and are generally nasty buggers?</p>",
     answers: ["A snake", "A toad", "An adder", "A stingfish", "A snapping turtle"],
@@ -63,7 +54,6 @@ $(document).ready(function() {
   var currentQuestion = 0;
   var numPoints = 0;
 
-// var number = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
 var startTime = questions[currentQuestion].questionTime;
 var interval;
 var endTime = 0;
@@ -157,8 +147,10 @@ function resetGame() {
 }
 
 function shakespearePop () {
-$(".shakespeareText").html("<p style='color:white'>Great job! Keep it up!</p>")
-$(".shakespeare").addClass("not-off");
+var shakesText = ["<p>Thou art a beast!</p>", "<p>Way to lay the smacketh down!</p>", "<p>Thine insults are dope!</p>"];
+var randNumber = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+  $(".shakespeareText").html(shakesText[randNumber]);
+  $(".shakespeare").addClass("not-off");
 setTimeout(function() {
   $(".shakespeare").removeClass("not-off");
 }, 5000);
@@ -176,11 +168,11 @@ setTimeout(function() {
                   // makes the pointsCounter div go up
                   pointsGoUp();
                   shakespearePop();
-                  //end of game prompt
+                  //this codes runs when you complete the game
                   if (currentQuestion === questions.length - 1) {
-                    $("#answer").html("<p>You beat the game! Congrats!</p>");
-                    resetGame();
-                    return;
+                    $("#answer").html("<p>TRUMEPTS! CHEERS! CAKE! YOU WIN!</p>");
+                    modal.html("<div class='modal-content'><p>Thou hast beaten all opponents, and verily are a true insult master. Go forth, insult-knight, and use thy skills for good. As Shakespeare himself once said, 'With great power comes great responsibility.'</p></div>");
+                    modal.css("display", "block");
                   };
                   // loads the next question
                   loadNextTrivia();
