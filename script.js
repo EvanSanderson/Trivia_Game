@@ -19,40 +19,40 @@ span.on("click", function() {
 
 // global variable contains questions and answer key values
   var questions = [
-    {question:"<p> Some knave steps up and compares your smell to old milk. What stinger do you throw back at him? </p> <br> <p> Thou art as _____ as butter.</p>",
-    answers: ["stinky","odious","farty","fat","runny"],
+    {question:"<p> Some knave steps up and compares your smell to old milk. You dimly recall a stinger to throw back him from Henry IV Part 1. </p> <br> <p> Thou art as _____ as butter.</p>",
+    answers: ["stinky","odious","farty","runny", "fat"],
     answerKey: "fat",
-    questionTime: 60
+    questionTime: 70
     },
-    {question: "<p>Two rapscallions tell you that you have the brains and prowess of a field mouse.</p> <br> <p> What creature would Shakespeare use to describe those who lie venomously and are generally nasty buggers?</p>",
-    answers: ["A snake", "A toad", "An adder", "A stingfish", "A snapping turtle"],
+    {question: "<p>Two rapscallions tell you that you have the brains and prowess of a field mouse.</p> <br> <p> What creature does Shakespeare use to describe those who lie venomously and are generally nasty buggers?</p>",
+    answers: ["A snake", "An adder", "A stingfish", "A snapping turtle", "A toad"],
     answerKey: "A toad",
-    questionTime: 45
+    questionTime: 50
   },
-    {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem: Your ___ breeds mites, much like ___.</p>",
-    answers: ["virginity/cheese", "breath/rotten flesh", "humours/sewage", "crouch/stale bread", "face/manure"],
+    {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem from All's Well That Ends Well: Your ___ breeds mites, much like ___.</p>",
+    answers: ["breath/rotten flesh", "humours/sewage", "crouch/stale bread", "face/manure", "virginity/cheese",],
     answerKey: "virginity/cheese",
-    questionTime: 40
+    questionTime: 50
   },
     {question: "<p>A thin woman sidles up to you and whispers in your ear something indecent about your mother.</p> <br><p>You have to spit something back, but your mind is blank. What would Titus Andronicus say? </p>",
-    answers: ["Thy mother is an elderberry whore", "Avaunt! You spittewattle arse-licker!", "Villain, I have done thy mother", "Ho-thou was't fathered by an infected newt", "Feast on my trousers, codswallow"],
+    answers: ["Thy mother is an elderberry whore", "Avaunt! You spittewattle arse-licker!", "Ho-thou was't fathered by an infected newt", "Feast on my trousers, codswallow", "Villain, I have done thy mother"],
     answerKey: "Villain, I have done thy mother",
-    questionTime: 30
+    questionTime: 40
   },
     {question: "<p> The crowd is calling for a Timon of Athens insult! Timon of Athens? Is that even a Shakespearean play? </p> <br> <p> It's tim-on to spit some Athenian insults! What do you say? </p>",
-    answers: ["Methink’st thou art a general offence and every man should beat thee", "I do wish thou were a dog, that I might love thee something", "On my knee I give heaven thanks that I am not like to thee", "Thou halfpenny purse of wit, thou pigeon egg of discretion", "Stinkwattle! Odious foot-monger! Bearer of bile!"],
+    answers: ["Methink’st thou art a general offence and every man should beat thee", "On my knee I give heaven thanks that I am not like to thee", "Thou halfpenny purse of wit, thou pigeon egg of discretion", "Stinkwattle! Odious foot-monger! Bearer of bile!", "I do wish thou were a dog, that I might love thee something"],
     answerKey: "I do wish thou were a dog, that I might love thee something",
-    questionTime: 25
+    questionTime: 40
 },
-  {question: "<p> A hush comes over the crowd, and a wild Falstaff appears. Considered a Shakespearean put-down master, Falstaff is known for stringing insult onto insult until either he or his opponent collapse.</p><br><p> His only known weakness are insults he hasn't heard before (i.e. NOT FROM SHAKESPEARE). What do you say?! Quick! He's about start!</p>",
+  {question: "<p> A hush comes over the crowd, and a wild Falstaff appears. Considered a Shakespearean put-down master, Falstaff is known for stringing insult onto insult until either he or his opponent collapse.</p><br><p> His only known weakness are insults he hasn't heard before (i.e. NOT FROM PLAYS THAT HE IS IN). What do you say?! Quick! He's about start!</p>",
   answers: ["Peace, ye fat guts", "Thou scullion! Thou rampallion!", "Thou whoreson obscene greasy tallow-catch!", "You sweat to death and lard the lean earth you walk upon", "Thou roguish unchin-snouted common-kissing canker-blossom!"],
   answerKey: "Thou roguish unchin-snouted common-kissing canker-blossom!",
-  questionTime: 25
+  questionTime: 40
   }
   ]
 
-  var currentQuestion = 0;
-  var numPoints = 0;
+var currentQuestion = 0;
+var numPoints = 0;
 
 var startTime = questions[currentQuestion].questionTime;
 var interval;
@@ -89,6 +89,7 @@ function loadQuestion() {
   timerGo();
 }
 
+
 function loadAnswers() {
   // loads the first answer set in the array
   $("ul").each(function() {
@@ -96,12 +97,14 @@ function loadAnswers() {
       $("<li/>").appendTo(this);
       $("li").eq(i).html(questions[currentQuestion].answers[i]);
     }
+
   })
+  // shuffles the lis so the answers are not always listed in the same order
   $("ul li").shuffle();
 }
 
 
-
+// this function gives the user points based upon the amount of time that has passed
 function pointsGoUp() {
   if(startTime >= questions[currentQuestion].questionTime - (questions[currentQuestion].questionTime / 3)) {
   numPoints += 20;
@@ -113,15 +116,18 @@ function pointsGoUp() {
   $("#pointCounter").html(numPoints + " points");
 }
 
+// this function makes the points go down
 function pointsGoDown() {
   numPoints -= 10;
   $("#pointCounter").html(numPoints + " points");
 }
 
+// loads the first question
     loadQuestion();
     loadAnswers();
 
-    // should load next Trivia question and answer set by iterating on current Question;
+
+    //  loads next Trivia question and answer set by iterating on current Question;
     function loadNextTrivia() {
       currentQuestion +=1;
       $(".questions").html(questions[currentQuestion]["question"]);
@@ -129,13 +135,15 @@ function pointsGoDown() {
       startTime = questions[currentQuestion].questionTime;
       timerGo();
       $("ul").each(function() {
-        for(i=0;i<5;i++){
+        for(i=0;i<questions[currentQuestion].answers.length;i++){
           $("li").eq(i).show();
           $("li").eq(i).html(questions[currentQuestion].answers[i]);
         }
       })
       $("ul li").shuffle();
     };
+
+
 
 
 // fades out the right or wrong answer prompt;
@@ -150,6 +158,7 @@ function resetGame() {
   numPoints = 0;
   loadQuestion();
   for(i=0;i<5;i++){
+    $("li").eq(i).show();
     $("li").eq(i).html(questions[currentQuestion].answers[i]);
   }
 }
@@ -184,8 +193,13 @@ setTimeout(function() {
                   };
                   // loads the next question
                   loadNextTrivia();
+                  qFade();
                   if (currentQuestion === questions.length - 1) {
-                    $("#bossBattle").html("<h6>BOSS BATTLE!!!</h6>");
+                    var $bossBattle = $("#bossBattle");
+                    var backgroundInterval = setInterval(function() {
+                      $bossBattle.toggleClass("backgroundRed");
+                    }, 1000)
+                    $("#bossBattle").html("<p>BOSS BATTLE!!!</p>");
                   }
 
               } else {
@@ -209,42 +223,36 @@ setTimeout(function() {
       }
 
     });
-    //
-    // var testTime = questions[currentQuestion].questionTime * 1000;
-    // var currentAnswer = questions[currentQuestion].answerKey;
-    //
-    //   setTimeout(function() {
-    //     $("ul li").eq(0).hide();
-    //   }, (testTime/4));
-    //
-    //   setTimeout(function() {
-    //     $("ul li").eq(1).hide();
-    //   }, (testTime/2));
-    //
-    //   setTimeout(function() {
-    //     $("ul li").eq(2).hide();
-    //   }, (testTime * 3/4));
+
+// fades questions out at differing rates when they ARENT the answer
+  function qFade() {
+    var qTotal = (questions[currentQuestion].questionTime) * 1000;
+    var currentAnswers = [$("ul li").eq(0).html(), $("ul li").eq(1).html(), $("ul li").eq(2).html(), $("ul li").eq(3).html(), $("ul li").eq(4).html()];
+
+      if(currentAnswers[0] !== questions[currentQuestion].answerKey) {
+        setTimeout(function() {
+          $("ul li").eq(0).hide();
+        }, qTotal/2);
+      }
+
+      if(currentAnswers[1] !== questions[currentQuestion].answerKey) {
+        setTimeout(function() {
+          $("ul li").eq(1).hide();
+        }, qTotal* 3/4);
+      }
+
+      if(currentAnswers[2] !== questions[currentQuestion].answerKey) {
+        setTimeout(function() {
+          $("ul li").eq(2).hide();
+        }, qTotal * 5/6);
+      }
+
+      if(currentAnswers[3] !== questions[currentQuestion].answerKey) {
+        setTimeout(function() {
+          $("ul li").eq(3).hide();
+        }, qTotal * 7/8);
+  }
+  }
 
 
-    // resets if player hits certain threshold of negative numbers
-
-// HAd a timer on each question, each question was worth 100 points, each second would eliminate a question,, and worth less points.
-//make modular with dom loading a new one each time
-// 1. get the right question to advance the game to the next question
-// 1a. Get the right set of answers to display as lis
-// 2. create a point counter that has the right question advance the point counter
-// 3. have wrong questions lower the point counter
-// 4. create a shuffle mechanism that re orders the questions
-// 4. create a shuffle mechanism  that re orders the respective answers
-
-// 5. add function that ends game at a certain negative point threshold
-//6. add styling
-//7. add intro that sets up the game
-//8. add descending point values for the timer going down
-// add a light box like feature
-// add a floating Shakespeare figure who comes in when you are right.
-// all above is done
-//add sound !
-// add more questions!
-/// change boss battle thing
 });

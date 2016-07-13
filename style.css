@@ -9,7 +9,7 @@
 
 #background {
   position: relative;
-  height: 110vh;
+  height: 120vh;
 }
 
 
@@ -201,4 +201,28 @@ ul li {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#bossBattle {
+    width: 5em;
+    height: 5em;
+    float: left;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    background: rgba(236,246,255);
+  -webkit-transition: background 1.0s ease-in-out;
+  -ms-transition: background 1.0s ease-in-out;
+  transition: background 1.0s ease-in-out;
+}
+
+#bossBattle p {
+  color:white;
+}
+
+.backgroundRed {
+  background: #F00;
 }
