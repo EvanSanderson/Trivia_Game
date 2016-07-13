@@ -193,7 +193,7 @@ setTimeout(function() {
                   };
                   // loads the next question
                   loadNextTrivia();
-                  qFade();
+                  // aFade();
                   if (currentQuestion === questions.length - 1) {
                     var $bossBattle = $("#bossBattle");
                     var backgroundInterval = setInterval(function() {
@@ -224,35 +224,36 @@ setTimeout(function() {
 
     });
 
-// fades questions out at differing rates when they ARENT the answer
-  function qFade() {
-    var qTotal = (questions[currentQuestion].questionTime) * 1000;
-    var currentAnswers = [$("ul li").eq(0).html(), $("ul li").eq(1).html(), $("ul li").eq(2).html(), $("ul li").eq(3).html(), $("ul li").eq(4).html()];
-
-      if(currentAnswers[0] !== questions[currentQuestion].answerKey) {
-        setTimeout(function() {
-          $("ul li").eq(0).hide();
-        }, qTotal/2);
-      }
-
-      if(currentAnswers[1] !== questions[currentQuestion].answerKey) {
-        setTimeout(function() {
-          $("ul li").eq(1).hide();
-        }, qTotal* 3/4);
-      }
-
-      if(currentAnswers[2] !== questions[currentQuestion].answerKey) {
-        setTimeout(function() {
-          $("ul li").eq(2).hide();
-        }, qTotal * 5/6);
-      }
-
-      if(currentAnswers[3] !== questions[currentQuestion].answerKey) {
-        setTimeout(function() {
-          $("ul li").eq(3).hide();
-        }, qTotal * 7/8);
-  }
-  }
+// fades answers out at differing rates when they ARENT the answer -- NEED TO FIX
+  // var aFade = function aFade() {
+  //   var qTotal = (questions[currentQuestion].questionTime) * 1000;
+  //   var currentAnswers = [$("ul li").eq(0).html(), $("ul li").eq(1).html(), $("ul li").eq(2).html(), $("ul li").eq(3).html(), $("ul li").eq(4).html()];
+  //
+  //     if(currentAnswers[0] !== questions[currentQuestion].answerKey) {
+  //       setTimeout(function() {
+  //         if(currentAnswers)
+  //         $("ul li").eq(0).hide();
+  //       }, qTotal/2);
+  //     }
+  //
+  //     if(currentAnswers[1] !== questions[currentQuestion].answerKey) {
+  //       setTimeout(function() {
+  //         $("ul li").eq(1).hide();
+  //       }, qTotal* 3/4);
+  //     }
+  //
+  //     if(currentAnswers[2] !== questions[currentQuestion].answerKey) {
+  //       setTimeout(function() {
+  //         $("ul li").eq(2).hide();
+  //       }, qTotal * 5/6);
+  //     }
+  //
+  //     if(currentAnswers[3] !== questions[currentQuestion].answerKey) {
+  //       setTimeout(function() {
+  //         $("ul li").eq(3).hide();
+  //       }, qTotal * 7/8);
+  // }
+  // }
 
 
 });

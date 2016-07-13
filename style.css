@@ -136,10 +136,10 @@ ul li {
   height: 200px;
   position: absolute;
   bottom: 10px;
-  transform: translateX(-100%);
-  -webkit-transform: translateX(-100%);
-  -moz-transform: translateX(-100%);
-  -o-transform: translateX(-100%);
+  transform: translateX(-110%);
+  -webkit-transform: translateX(-110%);
+  -moz-transform: translateX(-110%);
+  -o-transform: translateX(-110%);
   transition: all 1s ease;
 }
 
@@ -152,7 +152,7 @@ ul li {
 }
 
 .not-off {
-  transform: translateX(90%);
+  transform: translateX(70%);
 }
 
 #shakesImg {
@@ -186,6 +186,12 @@ ul li {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+}
+
+.modal-header{
+  padding: 2px 16px;
+  background-color: grey;
+  color: white;
 }
 
 .close {
