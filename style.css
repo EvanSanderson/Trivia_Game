@@ -47,7 +47,7 @@ border-width: 17px 0 17px 67px;
 border-color: transparent #ECF6FF;
 display: block;
 width: 0;
-z-index: 1;
+z-index: 0.7;
 margin-top: -15px;
 right: -67px;
 top: 27%;
@@ -163,8 +163,7 @@ ul li {
 #shakesImg2{
   width: 75px;
   height: 75px;
-  float: right;
-  margin-top: -160px;
+  display: inline;
 }
 
 .modal {
@@ -185,7 +184,8 @@ ul li {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  position: relative;
+  width: 50%;
 }
 
 .modal-header{
@@ -199,7 +199,7 @@ ul li {
   float: right;
   font-size: 20px;
   font-weight: bold;
-  margin-top: 160px;
+  margin-top: 25%;
 }
 
 .close:hover,
@@ -219,7 +219,6 @@ ul li {
     border-radius: 10px;
     text-align: center;
     display: inline-block;
-    background: rgba(236,246,255);
   -webkit-transition: background 1.0s ease-in-out;
   -ms-transition: background 1.0s ease-in-out;
   transition: background 1.0s ease-in-out;

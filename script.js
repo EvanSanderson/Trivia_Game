@@ -4,6 +4,8 @@ $(document).ready(function() {
 var modal = $("#myModal");
 var btn = $("#myBtn");
 var span = $(".close");
+var timeOutID;
+var timeOutID2;
 
 $(window).load(function() {
   modal.css("display", "block");
@@ -27,12 +29,12 @@ span.on("click", function() {
     {question: "<p>Two rapscallions tell you that you have the brains and prowess of a field mouse.</p> <br> <p> What creature does Shakespeare use to describe those who lie venomously and are generally nasty buggers?</p>",
     answers: ["A snake", "An adder", "A stingfish", "A snapping turtle", "A toad"],
     answerKey: "A toad",
-    questionTime: 50
+    questionTime: 16
   },
     {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem from All's Well That Ends Well: Your ___ breeds mites, much like ___.</p>",
     answers: ["breath/rotten flesh", "humours/sewage", "crouch/stale bread", "face/manure", "virginity/cheese",],
     answerKey: "virginity/cheese",
-    questionTime: 50
+    questionTime: 16
   },
     {question: "<p>A thin woman sidles up to you and whispers in your ear something indecent about your mother.</p> <br><p>You have to spit something back, but your mind is blank. What would Titus Andronicus say? </p>",
     answers: ["Thy mother is an elderberry whore", "Avaunt! You spittewattle arse-licker!", "Ho-thou was't fathered by an infected newt", "Feast on my trousers, codswallow", "Villain, I have done thy mother"],
@@ -188,12 +190,14 @@ setTimeout(function() {
                   //this codes runs when you complete the game
                   if (currentQuestion === questions.length - 1) {
                     $("#answer").html("<p>TRUMEPTS! CHEERS! CAKE! YOU WIN!</p>");
-                    modal.html("<div class='modal-content'><p>Thou hast beaten all opponents, and verily are a true insult master. Go forth, insult-knight, and use thy skills for good. As Shakespeare himself once said, 'With great power comes great responsibility. You got " + numPoints + " points! </div>");
+                    modal.html("<div class='modal-content'><p>Thou hast beaten all opponents, and verily are a true insult master. Go forth, insult-knight, and use thy skills for good. Now - to celebrate! As Shakespeare himself once said, 'Cake for everyone!' You got " + numPoints + " points! </div><img src='cake.png'></img>");
                     modal.css("display", "block");
                   };
                   // loads the next question
+                  clearTimeout(timeOutID);
+                  clearTimeout(timeOutID2);
                   loadNextTrivia();
-                  // aFade();
+                  aFade();
                   if (currentQuestion === questions.length - 1) {
                     var $bossBattle = $("#bossBattle");
                     var backgroundInterval = setInterval(function() {
@@ -225,35 +229,29 @@ setTimeout(function() {
     });
 
 // fades answers out at differing rates when they ARENT the answer -- NEED TO FIX
-  // var aFade = function aFade() {
-  //   var qTotal = (questions[currentQuestion].questionTime) * 1000;
-  //   var currentAnswers = [$("ul li").eq(0).html(), $("ul li").eq(1).html(), $("ul li").eq(2).html(), $("ul li").eq(3).html(), $("ul li").eq(4).html()];
-  //
-  //     if(currentAnswers[0] !== questions[currentQuestion].answerKey) {
-  //       setTimeout(function() {
-  //         if(currentAnswers)
-  //         $("ul li").eq(0).hide();
-  //       }, qTotal/2);
-  //     }
-  //
-  //     if(currentAnswers[1] !== questions[currentQuestion].answerKey) {
-  //       setTimeout(function() {
-  //         $("ul li").eq(1).hide();
-  //       }, qTotal* 3/4);
-  //     }
-  //
-  //     if(currentAnswers[2] !== questions[currentQuestion].answerKey) {
-  //       setTimeout(function() {
-  //         $("ul li").eq(2).hide();
-  //       }, qTotal * 5/6);
-  //     }
-  //
-  //     if(currentAnswers[3] !== questions[currentQuestion].answerKey) {
-  //       setTimeout(function() {
-  //         $("ul li").eq(3).hide();
-  //       }, qTotal * 7/8);
-  // }
-  // }
+  function aFade() {
+    var qTotal = (questions[currentQuestion].questionTime) * 1000;
+    var currentAnswers = [$("ul li").eq(0).html(), $("ul li").eq(1).html(), $("ul li").eq(2).html(), $("ul li").eq(3).html(), $("ul li").eq(4).html()];
+
+      if(currentAnswers[0] !== questions[currentQuestion].answerKey) {
+        timeOutID = setTimeout(function() {
+          if(currentAnswers)
+          $("ul li").eq(0).hide();
+        }, qTotal/2);
+      } else if(currentAnswers[0] === questions[currentQuestion].answerKey) {
+        $("ul li").eq(0).show();
+      }
+
+      if(currentAnswers[1] !== questions[currentQuestion].answerKey) {
+        timeOutID2 = setTimeout(function() {
+          $("ul li").eq(1).hide();
+        }, qTotal/4);
+        console.log(timeOutID2);
+      } else if(currentAnswers[0] === questions[currentQuestion].answerKey) {
+        $("ul li").eq(1).show();
+      }
+  }
+
 
 
 });
