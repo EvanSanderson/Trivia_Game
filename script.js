@@ -29,7 +29,7 @@ span.on("click", function() {
     answerKey: "A toad",
     questionTime: 45
   },
-    {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem: Your ___ breeds mites, much like ___</p>",
+    {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem: Your ___ breeds mites, much like ___.</p>",
     answers: ["virginity/cheese", "breath/rotten flesh", "humours/sewage", "crouch/stale bread", "face/manure"],
     answerKey: "virginity/cheese",
     questionTime: 40
@@ -209,21 +209,21 @@ setTimeout(function() {
       }
 
     });
-
-    var testTime = questions[currentQuestion].questionTime * 1000;
-    var currentAnswer = questions[currentQuestion].answerKey;
-
-      setTimeout(function() {
-        $("ul li").eq(0).hide();
-      }, (testTime/4));
-
-      setTimeout(function() {
-        $("ul li").eq(1).hide();
-      }, (testTime/2));
-
-      setTimeout(function() {
-        $("ul li").eq(2).hide();
-      }, (testTime * 3/4));
+    //
+    // var testTime = questions[currentQuestion].questionTime * 1000;
+    // var currentAnswer = questions[currentQuestion].answerKey;
+    //
+    //   setTimeout(function() {
+    //     $("ul li").eq(0).hide();
+    //   }, (testTime/4));
+    //
+    //   setTimeout(function() {
+    //     $("ul li").eq(1).hide();
+    //   }, (testTime/2));
+    //
+    //   setTimeout(function() {
+    //     $("ul li").eq(2).hide();
+    //   }, (testTime * 3/4));
 
 
     // resets if player hits certain threshold of negative numbers

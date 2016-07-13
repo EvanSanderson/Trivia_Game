@@ -9,8 +9,7 @@
 
 #background {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 110vh;
 }
 
 
@@ -101,22 +100,37 @@ ul li {
   display: block;
   margin: 0 auto;
   text-align: center;
-  width: 20%;
+  width: 30%;
   margin-top: 20px;
   background: rgba(236,246,255,.7);
   border: 2px solid black;
+  font-size: 2em;
 }
+
 
 #pointCounter {
   display: block;
   margin: 0 auto;
   text-align: center;
-  width: 20%;
+  width: 30%;
   margin-top: 20px;
   background: rgba(236,246,255,.7);
   border: 2px solid black;
+  font-size: 2em;
 }
 
+@media (max-width: 600px) {
+  #pointCounter {
+    display: block;
+    margin-top: -20%;
+    margin-right: 5%;
+    text-align: center;
+    width: 20%;
+    background: rgba(236,246,255,.7);
+    border: 2px solid black;
+    font-size: 2em;
+  }
+}
 .shakespeare {
   width: 200px;
   height: 200px;
