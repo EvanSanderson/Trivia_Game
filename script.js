@@ -21,7 +21,7 @@ span.on("click", function() {
 
 // global variable contains questions and answer key values
   var questions = [
-    {question:"<p> Some knave steps up and compares your smell to old milk. You dimly recall a stinger to throw back him from Henry IV Part 1. </p> <br> <p> Thou art as _____ as butter.</p>",
+    {question:"<p> Some knave steps up and compares your smell to old milk. You dimly recall a stinger to throw back at him from Henry IV Part 1. </p> <br> <p> Thou art as _____ as butter.</p>",
     answers: ["stinky","odious","farty","runny", "fat"],
     answerKey: "fat",
     questionTime: 70
@@ -29,12 +29,12 @@ span.on("click", function() {
     {question: "<p>Two rapscallions tell you that you have the brains and prowess of a field mouse.</p> <br> <p> What creature does Shakespeare use to describe those who lie venomously and are generally nasty buggers?</p>",
     answers: ["A snake", "An adder", "A stingfish", "A snapping turtle", "A toad"],
     answerKey: "A toad",
-    questionTime: 16
+    questionTime: 50
   },
     {question: "<p>From the back of the crowd, you hear 'You liver pated lily! You lascivious leech! You little--'. <br> <p> You cut him off with this Shakespearean gem from All's Well That Ends Well: Your ___ breeds mites, much like ___.</p>",
     answers: ["breath/rotten flesh", "humours/sewage", "crouch/stale bread", "face/manure", "virginity/cheese",],
     answerKey: "virginity/cheese",
-    questionTime: 16
+    questionTime: 50
   },
     {question: "<p>A thin woman sidles up to you and whispers in your ear something indecent about your mother.</p> <br><p>You have to spit something back, but your mind is blank. What would Titus Andronicus say? </p>",
     answers: ["Thy mother is an elderberry whore", "Avaunt! You spittewattle arse-licker!", "Ho-thou was't fathered by an infected newt", "Feast on my trousers, codswallow", "Villain, I have done thy mother"],
@@ -49,7 +49,7 @@ span.on("click", function() {
   {question: "<p> A hush comes over the crowd, and a wild Falstaff appears. Considered a Shakespearean put-down master, Falstaff is known for stringing insult onto insult until either he or his opponent collapse.</p><br><p> His only known weakness are insults he hasn't heard before (i.e. NOT FROM PLAYS THAT HE IS IN). What do you say?! Quick! He's about start!</p>",
   answers: ["Peace, ye fat guts", "Thou scullion! Thou rampallion!", "Thou whoreson obscene greasy tallow-catch!", "You sweat to death and lard the lean earth you walk upon", "Thou roguish unchin-snouted common-kissing canker-blossom!"],
   answerKey: "Thou roguish unchin-snouted common-kissing canker-blossom!",
-  questionTime: 40
+  questionTime: 35
   }
   ]
 
@@ -228,7 +228,7 @@ setTimeout(function() {
 
     });
 
-// fades answers out at differing rates when they ARENT the answer -- NEED TO FIX
+// fades a few answers out at differing rates when they ARENT the answer
   function aFade() {
     var qTotal = (questions[currentQuestion].questionTime) * 1000;
     var currentAnswers = [$("ul li").eq(0).html(), $("ul li").eq(1).html(), $("ul li").eq(2).html(), $("ul li").eq(3).html(), $("ul li").eq(4).html()];
