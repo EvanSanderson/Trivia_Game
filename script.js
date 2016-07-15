@@ -82,7 +82,7 @@ function timerGo() {
 };
 
 
-
+//Maybe have one function for questions and answers, etc.?
 function loadQuestion() {
   // loads the first question in the array
   $(".questions").html(questions[currentQuestion]["question"]);
